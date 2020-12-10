@@ -30,7 +30,6 @@
     },
     data() {
       return {
-        activeNotifications: false,
         showMenu: false,
         searchModalVisible: false,
         searchQuery: ''
