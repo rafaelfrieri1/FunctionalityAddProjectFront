@@ -2,8 +2,8 @@
   "name": "torre-application",
   "version": "1.0.0",
   "private": true,
-  "description": "A sample admin dashboard based on black dashboard UI template",
-  "author": "cristian.jora <joracristi@gmail.com>",
+  "description": "A simple application that analyzes data, provides search, and adds some functionalities with Torre.co data.",
+  "author": "r.frieri <r.frieri@javeriana.edu.co>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

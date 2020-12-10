@@ -1,23 +1,21 @@
 # Change Log
 
-## [1.1.1] 2020-06-26
-- Package updates
+## [1.0.3] 2020-12-10
+- Dynamic bar charts implementation glitch fixed.
+- Circular progress load added.
+- Documentation updated.
+- Minor bugs fixed.
 
-## [1.1.0] 2019-02-12
-- Package updates
-- Add pwa support
-- Improve accessibility
-- Cleanups & other minor UI improvements
-- Improve bundle size
+## [1.0.2] 2020-12-09
+- Created the view for the Unpopular Audiences functionality.
+- Added the functionality for the Trending Skills functionality.
+- Added the functionality for the Search for Recruiters functionality.
+- Added the functionality for the Unpopular Audiences functionality.
 
-## [1.0.1] 2018-12-03
-### Minor updates
-- Upgrade packages
-- Change sidebar gradient colors (more pleasant)
-- Make links "bolder" in the sidebar so they are more readable
-- Improve bundle size, add vue-router prefetch
-- Add pwa support
+## [1.0.1] 2020-12-09
+- Created the view for the Trending Skills functionality.
+- Created the view for the Search for Recruiters functionality.
 
 
-## [1.0.0] 2018-10-14
-### Stable Original Release
+## [1.0.0] 2020-12-08
+Established the project template with Vue.js.
