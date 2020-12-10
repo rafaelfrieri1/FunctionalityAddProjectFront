@@ -6,7 +6,7 @@
           <template slot="header">
             <div class="row">
               <h3 class="card-title">
-                <i class="tim-icons icon-chart-bar-32 text-primary "></i>Jobs vs Skills
+                <i class="tim-icons icon-chart-bar-32 text-primary "></i># of People vs. Working Area
               </h3>
               <base-input class="dropdown-black col-md-4 ml-auto" label="Bars">
                 <select
@@ -19,7 +19,7 @@
               </base-input>
             </div>
           </template>
-
+          
           <div class="chart-area">
             <bar-chart
               style="height: 100%"
@@ -27,10 +27,18 @@
               :chart-data="jobsSkillsChart.chartData"
               :gradient-stops="jobsSkillsChart.gradientStops"
               :extra-options="jobsSkillsChart.extraOptions"
+              :key = "chartKey"
             >
             </bar-chart>
           </div>
         </card>
+        <v-progress-circular
+          :size="70"
+          :width="7"
+          color="green"
+          indeterminate
+          v-show="!searchCompleted"
+        ></v-progress-circular>
       </div>
 
       <div class="col-lg-6 col-md2">
@@ -64,15 +72,17 @@ export default {
   },
   data() {
     return {
-      numBars: 6,
+      numBars: 5,
       list: [],
+      chartKey : 0,
+      searchCompleted : false,
       jobsSkillsChart: {
         extraOptions: chartConfigs.barChartOptions,
-        chartData: {
+        chartData:{
           labels:[],
           datasets: [
             {
-              label: "Jobs vs Skills",
+              label: "# of People vs Working Area",
               fill: true,
               borderColor: config.colors.info,
               borderWidth: 2,
@@ -85,7 +95,7 @@ export default {
         gradientColors: config.colors.primaryGradient,
         gradientStops: [1, 0.4, 0],
       },
-    };
+    }
   },
   watch: {
     numBars(val) {
@@ -94,8 +104,9 @@ export default {
   },
   methods: {
     initChart() {
+      this.searchCompleted = false
       this.list = []
-      this.$http.get(BASE_API+'/popular-skills/?size='+encodeURIComponent(this.numBars)).then( response => {
+      this.$http.get(BASE_API+'/target-audiences-platform-enhance/?size='+encodeURIComponent(this.numBars)).then( response => {
         if(response.status == "200") {
           let data = JSON.parse( JSON.stringify( response.body ) )
 
@@ -103,8 +114,10 @@ export default {
           this.jobsSkillsChart.chartData.datasets[0].data = data.total
 
           for(let i = 0; i < data.percentage_jobs.length; i++) {
-            this.list.push(data.percentage_jobs[i]+'% of job opportunities require '+ data.value[i]+' skills')
+            this.list.push('Only '+data.percentage_jobs[i]+'% of the users come from the '+ data.value[i]+' area.')
           }
+          this.chartKey += 1
+          this.searchCompleted = true
         }
       })
       .catch(error => {

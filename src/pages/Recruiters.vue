@@ -27,7 +27,7 @@
 
     <div class="col-12 card" v-show="searchStarted">
       <div class="card-header">
-        <h5 class="title">Search results</h5>
+        <h5 class="title">Search results (For different results, search again!)</h5>
       </div>
       <v-progress-circular
         :size="70"
@@ -38,7 +38,7 @@
       ></v-progress-circular>
       <div v-show="searchCompleted">
         <p>
-          For the {{ job.name }} position the most suitable users based on their
+          For the {{ job.name }} position the most suitable users (in a selected group) based on their
           skills are:
         </p>
         <div class="row">
@@ -74,6 +74,7 @@ export default {
   methods: {
     search() {
       this.searchStarted = true
+      this.searchCompleted = false
       this.$http.get(BASE_API+'/strength-based-search/?job-id='+encodeURIComponent(this.jobid)+'&size='+encodeURIComponent(this.numProfiles)).then( response => {
         if(response.status == "200") {
           let data = JSON.parse( JSON.stringify( response.body ) )
