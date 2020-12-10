@@ -3,8 +3,8 @@
     <side-bar>
       <template slot="links">
         <sidebar-link to="/trending" :name="$t('sidebar.trendingSkills')" icon="tim-icons icon-chart-pie-36"/>
-        <sidebar-link to="/recruiters" :name="$t('sidebar.recruiters')" icon="tim-icons icon-atom"/>
-        <sidebar-link to="/maps" :name="$t('sidebar.maps')" icon="tim-icons icon-pin"/>
+        <sidebar-link to="/recruiters" :name="$t('sidebar.recruiters')" icon="tim-icons icon-zoom-split"/>
+        <sidebar-link to="/unpopular" :name="$t('sidebar.unpopular')" icon="tim-icons icon-alert-circle-exc"/>
       </template>
     </side-bar>
     <div class="main-panel">

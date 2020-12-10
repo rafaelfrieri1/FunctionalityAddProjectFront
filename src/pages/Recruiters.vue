@@ -33,14 +33,21 @@
         For the {{ job.name }} position the most suitable users based on their
         skills are:
       </p>
-      <ul>
-        <li v-for="item in job.candidates">{{ item }}</li>
-      </ul>
+      <div class="row">
+        <div class="col-md-4" v-for="user in job.candidates" :key="user.username">
+          <user-card :user="user"></user-card>
+        </div>
+      </div>
     </div>
   </div>
 </template>
+
 <script>
+import UserCard from '@/components/UserCard'
 export default {
+  components: {
+    UserCard
+  },
   data() {
     return {
       jobid: '',
@@ -54,13 +61,24 @@ export default {
   },
   methods: {
     search() {
-      // TODO: make request
-      console.log(this.jobid, this.numProfiles)
-      this.name = 'Torre'
-      for (let i = 0; i < this.numProfiles; i++) {
-        this.job.candidates.push(i)
-      }
-      this.searchCompleted = true
+      this.$http.get('http://localhost:12345/strength-based-search?job-id='+encodeURIComponent(this.jobid)+'&size='+encodeURIComponent(this.numProfiles)).then( response => {
+        if(response.status == "200") {
+          let data = JSON.parse( JSON.stringify( response.body ) )
+          console.log(data)
+          this.job.name = data.jobName
+          this.job.candidates = data.employees
+          this.searchCompleted = true
+          console.log(this.job)
+        }
+      })
+      .catch(error => {
+        if (!error.response) {
+            // network error
+            this.errorStatus = 'Error: Network Error';
+        } else {
+            this.errorStatus = error.response.data.message;
+        }
+      });
     }
   }
 };

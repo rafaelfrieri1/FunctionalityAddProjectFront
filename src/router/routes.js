@@ -5,7 +5,7 @@ import NotFound from "@/pages/NotFoundPage.vue";
 // Admin pages
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */"@/pages/Dashboard.vue");
 const Recruiters = () => import(/* webpackChunkName: "common" */ "@/pages/Recruiters.vue");
-const Maps = () => import(/* webpackChunkName: "common" */ "@/pages/Maps.vue");
+const Unpopular = () => import(/* webpackChunkName: "common" */ "@/pages/Unpopular.vue");
 
 const routes = [
   {
@@ -24,9 +24,9 @@ const routes = [
         component: Recruiters
       },
       {
-        path: "maps",
-        name: "maps",
-        component: Maps
+        path: "unpopular",
+        name: "Unpopular Audiences",
+        component: Unpopular
       }
     ]
   },

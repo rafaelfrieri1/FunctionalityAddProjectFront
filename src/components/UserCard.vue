@@ -8,30 +8,20 @@
       <div class="block block-three"></div>
       <div class="block block-four"></div>
       <a href="#">
-        <img class="avatar" src="img/anime6.png" alt="...">
-        <h5 class="title">{{user.fullName}}</h5>
+        <img class="avatar" :src="user.picture" onerror="this.onerror=null; this.src='src/assets/images/profile.png'" alt="...">
+        <h5 class="title">{{user.name}}</h5>
       </a>
       <p class="description">
-        {{user.title}}
+        Score: {{user.score}}
       </p>
     </div>
     <p></p>
     <p class="card-description">
-      {{user.description}}
+      <a>https://bio.torre.co/en/{{user.username}}</a>
     </p>
-    <div slot="footer" class="button-container">
-      <base-button icon round class="btn-facebook">
-        <i class="fab fa-facebook"></i>
-      </base-button>
-      <base-button icon round class="btn-twitter">
-        <i class="fab fa-twitter"></i>
-      </base-button>
-      <base-button icon round class="btn-google">
-        <i class="fab fa-google-plus"></i>
-      </base-button>
-    </div>
   </card>
 </template>
+
 <script>
   export default {
     props: {

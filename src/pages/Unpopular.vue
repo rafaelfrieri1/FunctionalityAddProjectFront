@@ -86,15 +86,11 @@ export default {
       },
     };
   },
-  watch: {
-    numBars(val) {
-      this.initChart()
-    }
-  },
+  computed: {},
   methods: {
     initChart() {
-      this.list = []
-      this.$http.get('http://localhost:12345/popular-skills?size='+encodeURIComponent(this.numBars)).then( response => {
+      // TODO: change to init bar chart with numBars for request
+      this.$http.get('http://localhost:12345/popular-skills?size='+this.numBars).then( response => {
         if(response.status == "200") {
           let data = JSON.parse( JSON.stringify( response.body ) )
 
