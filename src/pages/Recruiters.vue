@@ -25,25 +25,36 @@
       </div>
     </div>
 
-    <div class="col-12 card" v-show="searchCompleted">
+    <div class="col-12 card" v-show="searchStarted">
       <div class="card-header">
         <h5 class="title">Search results</h5>
       </div>
-      <p>
-        For the {{ job.name }} position the most suitable users based on their
-        skills are:
-      </p>
-      <div class="row">
-        <div class="col-md-4" v-for="user in job.candidates" :key="user.username">
-          <user-card :user="user"></user-card>
+      <v-progress-circular
+        :size="70"
+        :width="7"
+        color="green"
+        indeterminate
+        v-show="!searchCompleted"
+      ></v-progress-circular>
+      <div v-show="searchCompleted">
+        <p>
+          For the {{ job.name }} position the most suitable users based on their
+          skills are:
+        </p>
+        <div class="row">
+          <div class="col-md-4" v-for="user in job.candidates" :key="user.username">
+            <user-card :user="user"></user-card>
+          </div>
         </div>
       </div>
-    </div>
+      </div>
   </div>
 </template>
 
 <script>
 import UserCard from '@/components/UserCard'
+import { BASE_API } from '@/constants'
+
 export default {
   components: {
     UserCard
@@ -53,6 +64,7 @@ export default {
       jobid: '',
       numProfiles: 20,
       searchCompleted: false,
+      searchStarted: false,
       job: {
         name: '',
         candidates: []
@@ -61,14 +73,13 @@ export default {
   },
   methods: {
     search() {
-      this.$http.get('http://localhost:12345/strength-based-search?job-id='+encodeURIComponent(this.jobid)+'&size='+encodeURIComponent(this.numProfiles)).then( response => {
+      this.searchStarted = true
+      this.$http.get(BASE_API+'/strength-based-search/?job-id='+encodeURIComponent(this.jobid)+'&size='+encodeURIComponent(this.numProfiles)).then( response => {
         if(response.status == "200") {
           let data = JSON.parse( JSON.stringify( response.body ) )
-          console.log(data)
           this.job.name = data.jobName
           this.job.candidates = data.employees
           this.searchCompleted = true
-          console.log(this.job)
         }
       })
       .catch(error => {

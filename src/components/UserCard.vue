@@ -8,7 +8,8 @@
       <div class="block block-three"></div>
       <div class="block block-four"></div>
       <a href="#">
-        <img class="avatar" :src="user.picture" onerror="this.onerror=null; this.src='src/assets/images/profile.png'" alt="...">
+        <img v-if="user.picture != null" class="avatar" :src="user.picture" alt="...">
+        <img v-else src="../assets/images/profile.jpg" class="avatar" alt="...">
         <h5 class="title">{{user.name}}</h5>
       </a>
       <p class="description">
@@ -17,7 +18,7 @@
     </div>
     <p></p>
     <p class="card-description">
-      <a>https://bio.torre.co/en/{{user.username}}</a>
+      Link to Bio: <a :href="getLink(user.username)">{{user.username}}</a>
     </p>
   </card>
 </template>
@@ -30,6 +31,11 @@
         default: () => {
           return {};
         }
+      }
+    },
+    methods: {
+      getLink(username) {
+        return "https://bio.torre.co/en/"+username
       }
     }
   }

@@ -55,6 +55,7 @@ import BarChart from "@/components/Charts/BarChart";
 import * as chartConfigs from "@/components/Charts/config";
 import DataList from "./Dashboard/DataList";
 import config from "@/config";
+import { BASE_API } from '@/constants'
 
 export default {
   components: {
@@ -94,7 +95,7 @@ export default {
   methods: {
     initChart() {
       this.list = []
-      this.$http.get('http://localhost:12345/popular-skills?size='+encodeURIComponent(this.numBars)).then( response => {
+      this.$http.get(BASE_API+'/popular-skills/?size='+encodeURIComponent(this.numBars)).then( response => {
         if(response.status == "200") {
           let data = JSON.parse( JSON.stringify( response.body ) )
 

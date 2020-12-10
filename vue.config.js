@@ -3,7 +3,6 @@ const webpack = require('webpack');
 module.exports = {
   lintOnSave: false,
   configureWebpack: {
-    // Set up all the aliases we use in our app.
     resolve: {
       alias: {
         'chart.js': 'chart.js/dist/Chart.js'
@@ -16,7 +15,7 @@ module.exports = {
     ]
   },
   pwa: {
-    name: 'Vue Black Dashboard',
+    name: 'Torre Application',
     themeColor: '#344675',
     msTileColor: '#344675',
     appleMobileWebAppCapable: 'yes',
@@ -31,7 +30,9 @@ module.exports = {
     }
   },
   css: {
-    // Enable CSS source maps.
-    sourceMap: process.env.NODE_ENV !== 'production'
-  }
-};
+    sourceMap: true
+  },
+  transpileDependencies: [
+    'vuetify'
+  ]
+}
