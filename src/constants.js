@@ -1,1 +1,1 @@
-export const BASE_API = process.env.VUE_APP_BASE_API || 'http://localhost:8080'
+export const BASE_API = process.env.VUE_APP_BASE_API || 'https://torre-api-functionality.herokuapp.com'
