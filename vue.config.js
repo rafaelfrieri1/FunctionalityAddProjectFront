@@ -34,5 +34,8 @@ module.exports = {
   },
   transpileDependencies: [
     'vuetify'
-  ]
+  ],
+  devServer:{
+    proxy:'https://torre-api-functionality.herokuapp.com/'
+  }
 }
